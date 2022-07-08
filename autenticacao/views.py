@@ -26,8 +26,10 @@ def cadastro(request):
             password=senha,
             is_active=False)
             user.save()
+            messages.add_message(request, constants.SUCCESS, 'Usuário Cadastrado com Sucesso')
             return redirect('/auth/login')
         except:
+            messages.add_message(request, constants.ERROR, 'Erro Interno')
             return redirect('/auth/cadastro')
 
 def logar(request):
@@ -44,4 +46,4 @@ def logar(request):
             return redirect('/auth/login')
         else:
             auth.login(request, usuario)
-            return redirect('/')
+            return HttpResponse('Login com sucesso')
