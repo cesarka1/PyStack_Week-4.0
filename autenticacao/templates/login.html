@@ -27,7 +27,7 @@
 <h2 class="titulo">Seja bem vindo</h2>
 <p class="sub-titulo">Entre com sua conta</p>
 <hr>
-<form action="" method="POST">{% csrf_token %}
+<form action="{% url 'login' %}" method="POST">{% csrf_token %}
 <span class="bold">Nome de usuário</span>
 <input class="form-control input-form" name="usuario" type="text" placeholder="Digite seu nome...">
 <br>
@@ -36,7 +36,7 @@
 <br>
 <button class="btn-first">Logar</button>
 </form>
-<h3 style="position: absolute; bottom: 65px; font-weight: bold">Não tem uma conta ?&nbsp <a class="btn btn-outline-success btn-lg">Registre-se</a> </h3>
+<h3 style="position: absolute; bottom: 65px; font-weight: bold">Não tem uma conta ?&nbsp <a href="{% url 'cadastro' %}" class="btn btn-outline-success btn-lg">Registre-se</a> </h3>
 </div>
 </div>
 {%endblock%}
