@@ -72,7 +72,7 @@ def ativar_conta(request, token):
     token = get_object_or_404(Ativacao, token=token)
     if token.ativo:
         messages.add_message(request, constants.WARNING, 'Essa token já foi usado')
-        return redirect('/auth/logar')
+        return redirect('/auth/login')
 
     user = User.objects.get(username=token.user.username)
 
