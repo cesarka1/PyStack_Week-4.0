@@ -3,7 +3,7 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
 from django.contrib.messages import constants
-
+from .models import Pacientes
 
 @login_required(login_url='/auth/login')
 def pacientes (request):
@@ -23,10 +23,24 @@ def pacientes (request):
             messages.add_message(request, constants.ERROR, 'Digite uma idade válida')
             return redirect('/pacientes/')
 
-        pacientes = pacientes.objects.filter(email=email)
+        pacientes = Pacientes.objects.filter(email=email)
 
         if pacientes.exists():
             messages.add_message(request, constants.ERROR, 'Já existe um paciente com esse E-mail')
             return redirect('/pacientes/')
 
-        return HttpResponse(f"{nome}, {sexo}, {idade}, {email}, {telefone}")
+        try:
+            paciente = Pacientes(nome=nome,
+                                sexo=sexo,
+                                idade=idade,
+                                email=email,
+                                telefone=telefone,
+                                nutri=request.user)
+
+            paciente.save()
+
+            messages.add_message(request, constants.SUCCESS, 'Paciênte cadastrado com sucesso')
+            return redirect('/pacientes/')
+        except:
+            messages.add_message(request, constants.ERROR, 'Erro interno do sistema')
+            return redirect('/pacientes/')
