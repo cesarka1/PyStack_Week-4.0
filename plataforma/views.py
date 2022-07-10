@@ -8,7 +8,8 @@ from .models import Pacientes
 @login_required(login_url='/auth/login')
 def pacientes (request):
     if request.method == "GET":
-        return render(request, 'paciente.html')
+        pacientes = Pacientes.objects.filter(nutri=request)
+        
     elif request.method == "POST":
         nome = request.POST.get('nome')
         sexo = request.POST.get('sexo')

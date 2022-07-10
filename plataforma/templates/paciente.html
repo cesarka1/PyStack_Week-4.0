@@ -15,6 +15,24 @@
   Novo paciente
 </button>
 
+<br>
+<br>
+<div  class="row">
+    {% for paciente in pacientes %}
+        <div class="col-md-4">
+            <a href="#" class="link-hover">
+                <div class="card-paciente">
+                    <div class="foto-perfil">
+                        <img src="{% static 'plataforma/img/perfil2.png' %}">
+                    </div>
+                    <br>
+                    <p class="dados">{{paciente.nome}}</p>
+                    <p class="dados">{{paciente.idade}}</p>
+                </div>
+            </a>
+        </div>
+    {% endfor %}
+</div>
 
 
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
